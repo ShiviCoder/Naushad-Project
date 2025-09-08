@@ -1,14 +1,16 @@
 import { View, Text, StyleSheet, Image, FlatList, ScrollView } from 'react-native';
 import RadioButton from '../components/RadioButton';
 import BookingAcceptCards from '../components/BookingAcceptCard';
-import { BookingAcceptData, BookingPendingData } from '../components/BookingAcceptData';
+import { BookingAcceptData, BookingPendingData, PreviousBookingData } from '../components/BookingAcceptData';
 import BookingPendingCard from '../components/BookingPendingCard';
+import PreviousBookingCard from '../components/PreviousBookingCard';
 
 
 
 const allBookings = [
     ...BookingAcceptData.map(item => ({ ...item, type: "accept" })),
     ...BookingPendingData.map(item => ({ ...item, type: "pending" })),
+    ...PreviousBookingData.map(item => ({ ...item, type: "previous" }))
 ];
 const BookingScreen = () => {
 
@@ -22,14 +24,31 @@ const BookingScreen = () => {
             <FlatList
                 data={allBookings}
                 style={styles.container}
-                showsVerticalScrollIndicator = {false}
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 50 }}
                 keyExtractor={(item, index) => item.id + "-" + index}
-                renderItem={({ item }) =>
-                    item.type === "accept"
-                        ? <BookingAcceptCards item={item} />
-                        : <BookingPendingCard item={item} />
-                }
+                renderItem={({ item, index }) => {
+                    if (item.type === "previous") {
+                        // check if it's the first previous booking
+                        const isFirstPrevious =
+                            index === 0 || allBookings[index - 1].type !== "previous";
+
+                        return (
+                            <>
+                                {isFirstPrevious && (
+                                    <Text style={styles.heading}>Previous Bookings</Text>
+                                )}
+                                <PreviousBookingCard item={item} />
+                            </>
+                        );
+                    } else if (item.type === "accept") {
+                        return <BookingAcceptCards item={item} />;
+                    } else if (item.type === "pending") {
+                        return <BookingPendingCard item={item} />;
+                    } else {
+                        return null;
+                    }
+                }}
             />
         </View>
     )
@@ -63,6 +82,13 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 20,
         // marginBottom: 10
+    },
+    heading: {
+        fontSize: 24,
+        fontWeight: "500",
+        marginVertical: 10,
+        marginLeft: 15,
+        fontFamily: 'Poppins-Medium'
     }
 
 

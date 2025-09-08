@@ -4,6 +4,7 @@ import ServicesScreen from './src/screens/ServicesScreen'
 import PackagesScreen from './src/screens/PackagesScreen'
 import ProductPackageScreen from './src/screens/ProductPackageScreen'
 import BookingScreen from './src/screens/BookingScreen'
+import AccountScreen from './src/screens/AccountScreen'
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       {/* <ServicesScreen/> */}
       {/* <PackagesScreen></PackagesScreen> */}
       {/* <ProductPackageScreen></ProductPackageScreen> */}
-      <BookingScreen></BookingScreen>
+      {/* <BookingScreen></BookingScreen> */}
+      <AccountScreen></AccountScreen>
     </View>
   )
 }
