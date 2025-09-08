@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
-import Svg, { Polygon } from "react-native-svg";
 import ProductData from '../components/ProductData';
-import { Shadow } from 'react-native-shadow-2';
 import Card from '../components/Card';
 const ProductPackageScreen = () => {
     return (
@@ -18,8 +16,7 @@ const ProductPackageScreen = () => {
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) =><Card item={item} />}
-                
-            />
+                />
         </View>
     )
 }
