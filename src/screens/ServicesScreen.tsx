@@ -6,63 +6,64 @@ const ServicesScreen = () => {
     console.log(Dummy[0].image);
     console.log(MainData[0].title)
     return (
-        <View>
-            <View>
-                <View style={styles.headContainer}>
-                    <Image source={require('../assets/Vector.png')}  />
-                    <Text style={styles.headText}>Services</Text>
-                </View>
+        <View style={styles.container}>
 
-                <View>
-                    <FlatList
-                        data={Dummy}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        style={styles.storyContainer}
-                        renderItem={({ item, index }) => {
-                            return (
-                                <View style={styles.storyView}>
-                                    <Image source={item.image} style={styles.storyImage}></Image>
-                                    <Text style={styles.storyText}>{item.name}</Text>
-                                </View>
-                            );
-                        }}
-                    />
+            <View style={styles.headContainer}>
+                <Image source={require('../assets/Vector.png')} />
+                <Text style={styles.headText}>Services</Text>
+            </View>
 
-                </View>
-
-                <View>
-                    <FlatList
-                        data={MainData}
-                        renderItem={({ item, index }) => {
-                            return (
-                                <View style={styles.MainView}>
-                                    <Image source={item.image} style={styles.sectionImage}></Image>
-
-                                    <View style={styles.rightContainer}>
-                                        <Text style={styles.mainText}>{item.title}</Text>
-                                        <Text style={styles.price}>₹{item.price}</Text>
-                                        <Text style={styles.desc}>{item.description}</Text>
-                                        <TouchableOpacity style={styles.bookButton}>
-                                            <Text style={styles.bookButtonText}>Book Now</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            );
-                        }}
-                    />
-                </View>
-
-
+            <View >
+                <FlatList
+                    data={Dummy}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ marginBottom: 20 }}
+                    style={styles.storyContainer}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View style={styles.storyView}>
+                                <Image source={item.image} style={styles.storyImage}></Image>
+                                <Text style={styles.storyText}>{item.name}</Text>
+                            </View>
+                        );
+                    }}
+                />
 
             </View>
+
+            <View >
+                <FlatList
+                    data={MainData}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View style={styles.MainView}>
+                                <Image source={item.image} style={styles.sectionImage}></Image>
+
+                                <View style={styles.rightContainer}>
+                                    <Text style={styles.mainText}>{item.title}</Text>
+                                    <Text style={styles.price}>₹{item.price}</Text>
+                                    <Text style={styles.desc}>{item.description}</Text>
+                                    <TouchableOpacity style={styles.bookButton}>
+                                        <Text style={styles.bookButtonText}>Book Now</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        );
+                    }}
+                />
+            </View>
         </View>
+
     )
 }
 
 export default ServicesScreen
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: 200
+    },
     headContainer: {
         flexDirection: 'row',
         alignItems: 'center',
