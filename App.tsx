@@ -6,6 +6,8 @@ import ProductPackageScreen from './src/screens/ProductPackageScreen'
 import BookingScreen from './src/screens/BookingScreen'
 import AccountScreen from './src/screens/AccountScreen'
 import BottomNavbar from './src/components/BottomNavbar'
+import BookAppointmentScreen from './src/screens/BookAppointmentScreen'
+import Payment from './src/screens/Payment'
 const App = () => {
   return (
     <View style={styles.container} >
@@ -13,8 +15,10 @@ const App = () => {
       {/* <PackagesScreen></PackagesScreen> */}
       {/* <ProductPackageScreen></ProductPackageScreen> */}
       {/* <BookingScreen></BookingScreen> */}
-      <AccountScreen></AccountScreen>
-      <BottomNavbar></BottomNavbar>
+      {/* <AccountScreen></AccountScreen> */}
+      {/* <BookAppointmentScreen></BookAppointmentScreen> */}
+      {/* <BottomNavbar></BottomNavbar> */}
+      <Payment />
     </View>
   )
 }
