@@ -1,112 +1,116 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import Calender from '../components/Calender';
 import TimeSelect from '../components/TimeSelect';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 
 export default function BookAppointmentScreen() {
 
   return (
+
     <View style={styles.mainContainer}>
       <View style={styles.headContainer}>
         <Image style={styles.headIcon} source={require('../assets/Vector.png')} />
         <Text style={styles.headText}>Book Appointment</Text>
       </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <View style={styles.mainImage}>
+            <Image style={styles.img} source={require('../assets/bookImage.png')} />
+          </View>
 
-      <View style={styles.container}>
-        <View style={styles.mainImage}>
-          <Image style={styles.img} source={require('../assets/bookImage.png')} />
+          <Text style={styles.Text}>Select Date</Text>
+
+          <View style={styles.calenderContainer}>
+            <Calender />
+          </View>
+
+          <Text style={styles.Text}>Select Time</Text>
+          <View style={styles.timeContainer}>
+            <TimeSelect />
+          </View>
+
+          <View style={styles.nxt}>
+            <TouchableOpacity style={styles.nxtButton}>
+              <Text style={styles.nxtText}>Next</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
-
-        <Text style={styles.Text}>Select Date</Text>
-
-        <View style={styles.calenderContainer}>
-          <Calender/>
-        </View>
- 
-        <Text style={styles.Text}>Select Time</Text>
-         <View style={styles.timeContainer}>
-             <TimeSelect />
-         </View>
-
-         <View style={styles.nxt}>
-           <TouchableOpacity style={styles.nxtButton}>
-            <Text style={styles.nxtText}>Next</Text>
-           </TouchableOpacity>
-         </View>
-
-      </View>
+      </ScrollView>
     </View>
+
+
   );
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 10,
-    marginBottom: 20,
+    padding: wp("4%"),
+    marginBottom: hp("0%"),
+    backgroundColor: "#fff",
   },
   headContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 20,
-    gap: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: hp("2%"),
+    gap: wp("20%"), // responsive spacing
   },
   headIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: 'contain',
+    width: wp("6%"),
+    height: wp("6%"),
+    resizeMode: "contain",
   },
   headText: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    fontFamily: 'Poppins-Bold',
+    fontSize: wp("5%"),
+    fontWeight: "700",
+    color: "#333",
+    fontFamily: "Poppins-Bold",
   },
   container: {
-    padding: 10,
+    padding: wp("3%"),
   },
   img: {
-    width: 310,
-    resizeMode: 'contain',
-    height: 161,
+    width: wp("85%"), // takes 85% of screen width
+    height: hp("20%"), // adjusts height based on screen
+    resizeMode: "contain",
+    alignSelf: "center",
   },
   Text: {
-    fontSize: 16,
-    paddingVertical: 5,
-    paddingHorizontal : 10,
-    fontFamily: 'Poppins-Regular',
-    fontWeight: '800',
+    fontSize: wp("4%"),
+    paddingVertical: hp("0.5%"),
+    paddingHorizontal: wp("2%"),
+    fontFamily: "Poppins-Regular",
+    fontWeight: "800",
   },
   calenderContainer: {
-    marginHorizontal: 5,
-    marginBottom : 10,
-    borderRadius: 10,
-    backgroundColor : 'red',
-    overflow: 'hidden',
+    marginHorizontal: wp("2%"),
+    marginBottom: hp("1%"),
   },
-  timeContainer : {
-     marginHorizontal: 2,
-     marginTop : 0,
-    marginBottom : 5,
-    borderRadius: 10,
-    overflow: 'hidden',
+  timeContainer: {
+    marginHorizontal: wp("1%"),
+    marginBottom: hp("1%"),
   },
-  nxt : {
-    marginHorizontal: 15,
-    alignItems : 'flex-end',
-
+  nxt: {
+    marginHorizontal: wp("4%"),
+    alignItems: "flex-end",
   },
-  nxtButton : {
-backgroundColor : '#F6B745',
-paddingVertical : 7,
-paddingHorizontal : 13,
-borderRadius  : 5
+  nxtButton: {
+    backgroundColor: "#F6B745",
+    paddingVertical: hp("1%"),
+    paddingHorizontal: wp("4%"),
+    borderRadius: wp("2%"),
   },
-  nxtText : {
-    color : '#ffffff',
-    fontSize:16,
-    fontWeight:'500'
-  }
+  nxtText: {
+    color: "#ffffff",
+    fontSize: wp("4%"),
+    fontWeight: "500",
+  },
 });

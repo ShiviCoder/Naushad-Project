@@ -3,7 +3,10 @@ import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Shadow } from 'react-native-shadow-2';
 import Button from '../components/Button';
-
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 
 const Payment = () => {
@@ -21,22 +24,22 @@ const Payment = () => {
             </View>
 
             <Shadow
-                distance={3}
+                distance={5}
                 startColor="#f7c744"
-                offset={[10, 13]}
+                offset={[0, 12]}
                 style={styles.shadowContainer}
             >
                 <View style={styles.container}>
                     <View style={styles.first}>
                         <Text style={styles.firstText}>Haircut</Text>
-                        <Icon style={styles.icon} name="ellipse" size={10} color="#000" />
+                        <Icon style={styles.icon} name="ellipse" size={5} color="#000" />
                         <Text style={[styles.firstText, { color: '#42BA86' }]}>Premium</Text>
                     </View>
 
                     <View style={styles.second}>
                         <Icon name="time-outline" size={21} color="#000" />
                         <Text style={styles.Text}>Fri, 15 Aug</Text>
-                        <Icon style={styles.SndIcon} name="ellipse" size={10} color="#000" />
+                        <Icon style={styles.SndIcon} name="ellipse" size={5} color="#000" />
                         <Text style={styles.Text}>3:30pm</Text>
                     </View>
 
@@ -62,10 +65,10 @@ const Payment = () => {
                         onPress={() => setIsSelected(option.key)}
                         activeOpacity={0.7}
                     >
-                        <View style={[styles.radioOuter,selected=== option.key && styles.radioOuterSelected,]}>
+                        <View style={[styles.radioOuter, selected === option.key && styles.radioOuterSelected,]}>
                             {selected === option.key && <View style={styles.radioInner} />}
                         </View>
-                        <Text style={[styles.label,styles.firstText]}>{option.label}</Text>
+                        <Text style={[styles.label, styles.firstText]}>{option.label}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -73,11 +76,11 @@ const Payment = () => {
 
             <View style={styles.total}>
                 <Text style={styles.totalText}>Total Payable:</Text>
-                <Text  style={[styles.totalText,{fontWeight : '500'}]}>₹1,498</Text>
+                <Text style={[styles.totalText, { fontWeight: '500' }]}>₹1,498</Text>
             </View>
 
             <View style={styles.pay}>
-              <Button/>
+                <Button />
             </View>
 
             <View style={styles.footer}>
@@ -90,133 +93,135 @@ const Payment = () => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#fff',
-        padding: 10,
-        marginBottom: 20,
+        backgroundColor: "#fff",
+        paddingHorizontal: wp("4%"),
+        paddingTop: hp("2%"),
     },
     headContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 20,
-        gap: 90,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: hp("2%"),
+        justifyContent: "flex-start",
     },
     headText: {
-        fontSize: 20,
-        fontWeight: '700',
-        color: '#333',
-        fontFamily: 'Poppins-Bold',
+        fontSize: wp("5%"),
+        fontWeight: "700",
+        color: "#333",
+        fontFamily: "Poppins-Bold",
+        marginLeft: wp('30%')
     },
     container: {
-        width: 330,
-        height: 189,
-        padding: 20,
-        margin: 10,
-        flexDirection: 'column',
-        gap: 14,
-        borderRadius: 16,
-        backgroundColor: '#fff'
+        width: wp("90%"),        // ~350px on small phones, expands on bigger screens
+        height: hp("23%"),       // keeps proportional height (instead of fixed 189px)
+        borderRadius: wp("4%"),  // corner radius scales with screen
+        backgroundColor: "#fff",
+        padding: wp("5%"),
+        marginVertical: hp("1%"),
+        justifyContent: "space-between",
     },
     shadowContainer: {
-        borderRadius: 16,
+        borderRadius: wp("4%"),
     },
     icon: {
-        width: 31,
-        textAlign: 'center'
+        width: wp("8%"),
+        textAlign: "center",
     },
     first: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: "baseline",
+        flexDirection: "row",
+        alignItems: "center",
     },
     firstText: {
-        fontSize: 20,
-        fontWeight: '500'
+        fontSize: wp("4.5%"),
+        fontWeight: "500",
     },
     second: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+        flexDirection: "row",
         alignItems: "center",
-        gap: 5
+        gap: wp("2%"),
     },
     Text: {
-        fontSize: 16,
-        fontWeight: '500'
+        fontSize: wp("4%"),
+        fontWeight: "500",
     },
     SndIcon: {
-        width: 31,
-        textAlign: 'center'
+        width: wp("8%"),
+        textAlign: "center",
     },
     third: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+        flexDirection: "row",
         alignItems: "center",
-        gap: 5
+        gap: wp("2%"),
     },
     fourth: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
     },
     payment: {
-        padding: 20,
+        paddingVertical: hp("4%"),
+        marginTop: hp("5%"), // 👈 add this
     },
     selectPayment: {
-        fontSize: 20,
-        fontWeight: '600',
-        fontFamily: 'Poppins-Medium'
+        fontSize: wp("4.5%"),
+        fontWeight: "600",
+        fontFamily: "Poppins-Medium",
+        marginBottom: hp("1%"),
     },
     option: {
         flexDirection: "row",
         alignItems: "center",
-        marginVertical: 8,
+        marginVertical: hp("1%"),
     },
     radioOuter: {
-        height: 18,
-        width: 18,
-        borderRadius: 9,
+        height: wp("5%"),
+        width: wp("5%"),
+        borderRadius: wp("2.5%"),
         borderWidth: 1,
         borderColor: "#999",
         alignItems: "center",
         justifyContent: "center",
-        marginRight: 12,
+        marginRight: wp("3%"),
     },
     radioInner: {
-        height: 8,
-        width: 8,
-        borderRadius: 5,
-        backgroundColor: "#050505ff", // amber (yellow-orange) fill
+        height: wp("2.5%"),
+        width: wp("2.5%"),
+        borderRadius: wp("1.5%"),
+        backgroundColor: "#050505ff",
     },
     label: {
-        fontSize: 14,
+        fontSize: wp("4%"),
         color: "#000",
         fontWeight: "500",
     },
     radioOuterSelected: {
-        backgroundColor: "#fbbf24", // yellow filled background (#fbbf24 = amber-400)
+        backgroundColor: "#fbbf24",
         borderWidth: 0,
     },
-    total  :{
-        flexDirection : 'row',
-        padding : 20,
-        justifyContent : "space-between"
+    total: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingVertical: hp("2%"),
+        marginBottom : hp('4%')
     },
-    totalText : {
-        fontSize : 24,
-        fontWeight : 600
+    totalText: {
+        fontSize: wp("5%"),
+        fontWeight: "600",
     },
-    pay :{
-        padding :20
+    pay: {
+        paddingVertical: hp("2%"),
     },
-    footer : {
-        padding : 20,
-        alignItems : 'center',
-        justifyContent : 'center'
+    footer: {
+        paddingVertical: hp("1.5%"),
+        alignItems: "center",
+        justifyContent: "center",
     },
-    footerTxt : {
-        fontSize : 12,
-        color : '#75757573',
-        fontWeight : '500',
-        fontFamily : 'Poppins-Medium'
-    }
-})
+    footerTxt: {
+        fontSize: wp("3%"),
+        color: "#757575",
+        fontWeight: "500",
+        fontFamily: "Poppins-Medium",
+        textAlign: "center",
+    },
+});
+
 export default Payment;

@@ -10,7 +10,6 @@ export default function Button() {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     payBtn: {
         backgroundColor: '#F6B745',
