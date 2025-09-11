@@ -1,112 +1,118 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Svg, { Polygon } from "react-native-svg";
 import { Shadow } from 'react-native-shadow-2';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const Card = ({ item }) => {
-    return (
-         <View style={styles.cardWrapper}>
-                {/* Folded top corners */}
-                <Svg height={90} width={157} style={styles.foldSvg}>
-                    {/* Top-left fold */}
-                    <Polygon points="0,0 20,0 0,20" fill="#ffffff" />
-                    {/* Top-right fold */}
-                    <Polygon points="157,0 137,0 157,20" fill="#ffffff" />
-                </Svg>
-        <Shadow distance={5} startColor="#F6B745AD" offset={[0, 10]}>
-           
+  // dynamic sizes
+  const cardWidth = wp("40%");  // each card takes ~40% of screen width
+  const cardHeight = hp("20%"); // proportional height
 
-                {/* Main Card */}
-                <View style={styles.container}>
-                    {/* Hexagon Header */}
-                    <View style={styles.header}>
-                        <Svg height="42.5" width="89.5">
-                            <Polygon
-                                points="0,0 89.5,0 89.5,29.75 44.75,42.5 0,29.75"
-                                fill="#F6B745"
-                            />
-                        </Svg>
-                        <Text style={styles.headerText}>{item.title}</Text>
-                    </View>
+  return (
+    <View style={[styles.cardWrapper, { width: cardWidth, height: cardHeight }]}>
+      {/* Folded top corners */}
+      <Svg height={hp("12%")} width={cardWidth} style={styles.foldSvg}>
+        <Polygon points={`0,0 ${wp("5%")},0 0,${wp("5%")}`} fill="#ffffff" />
+        <Polygon points={`${cardWidth},0 ${cardWidth - wp("5%")},0 ${cardWidth},${wp("5%")}`} fill="#ffffff" />
+      </Svg>
 
-                    {/* Card Content */}
-                    <View style={styles.cardContent}>
-                        <Text style={styles.rate}>
-                            Rate: <Text style={styles.bold}>{item.price}</Text>
-                        </Text>
-                        <Text style={styles.products}>
-                            Products: <Text style={styles.bold}>{item.products}</Text>
-                        </Text>
-                        <View style={styles.footerCon}>
-                            <Text style={styles.about}>{item.about}</Text>
-                            <TouchableOpacity style={styles.bookButton}>
-                                <Text style={styles.bookText}>Book now</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-           
-        </Shadow>
-         </View>
-    );
+      <Shadow distance={2} startColor="#F6B74580" offset={[0, hp("2%")]}>
+        {/* Main Card */}
+        <View style={[styles.container, { width: cardWidth, height: cardHeight }]}>
+          {/* Hexagon Header */}
+          <View style={styles.header}>
+            <Svg height={hp("6%")} width={cardWidth * 0.6}>
+              <Polygon
+                points={`0,0 ${cardWidth * 0.6},0 ${cardWidth * 0.6},${hp("4%")} ${(cardWidth * 0.6) / 2},${hp("6%")} 0,${hp("4%")}`}
+                fill="#F6B745"
+              />
+            </Svg>
+            <Text style={styles.headerText}>{item.title}</Text>
+          </View>
+
+          {/* Card Content */}
+          <View style={styles.cardContent}>
+            <Text style={styles.rate}>
+              Rate: <Text style={styles.bold}>{item.price}</Text>
+            </Text>
+            <Text style={styles.products}>
+              Products: <Text style={styles.bold}>{item.products}</Text>
+            </Text>
+            <View style={styles.footerCon}>
+              <Text style={styles.about}>{item.about}</Text>
+              <TouchableOpacity style={styles.bookButton}>
+                <Text style={styles.bookText}>Book now</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Shadow>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    cardWrapper: {
-        width: 157,
-        height: 140, // increased height to accommodate folds
-        margin : 10,
-        marginBottom : 30,
-        alignItems: 'center',
-        overflow: 'visible', // important for folded corners
-    },
-    foldSvg: {
-        position: 'absolute',
-        top: -1,
-        left: 0,
-        zIndex: 2,
-    },
-    container: {
-        backgroundColor: "#EDEDED",
-        borderRadius: 8,
-        width: '100%',
-        height: '100%',
-        alignItems: "center",
-        paddingHorizontal: 10,
-        paddingBottom : 25, // leave space for hexagon + folds
-        overflow: 'visible',
-    },
-    header: {
-        width: "100%",
-        height: 42.5,
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        marginBottom: 5,
-    },
-    headerText: {
-        position: "absolute",
-        fontSize: 10,
-        fontWeight: '500',
-        color: "#FFFFFF",
-    },
-    cardContent: {
-        width: "90%",
-        justifyContent: 'flex-start',
-    },
-    rate: { fontSize: 11, marginBottom: 3 },
-    products: { fontSize: 10, marginBottom: 8 },
-    about: { fontSize: 8, fontStyle: "italic", color: "#D19B00", marginBottom: 3, textAlign: "center" },
-    bookButton: {
-        backgroundColor: "#FFC107",
-        paddingVertical: 4,
-        paddingHorizontal: 6,
-        borderRadius: 20,
-        width: 36,
-        height: 13,
-    },
-    bookText: { color: "#fff", fontWeight: "bold", fontSize: 5 },
-    bold: { fontWeight: "bold" },
-    footerCon: { alignItems: 'center' },
+  cardWrapper: {
+    // margin: wp("2%"),
+    alignItems: 'center',
+     marginHorizontal : wp('3%'),
+    overflow: 'visible',
+    justifyContent : 'space-evenly'
+  },
+  foldSvg: {
+    position: 'absolute',
+    top: -1,
+    left: 0,
+    zIndex: 2,
+  },
+  container: {
+    backgroundColor: "#EDEDED",
+    borderRadius: wp("2%"),
+    alignItems: "center",
+    paddingHorizontal: wp("3%"),
+    paddingBottom: hp("2%"),
+    // marginHorizontal : wp('3%'),
+    overflow: 'visible',
+  },
+  header: {
+    width: "100%",
+    height: hp("6%"),
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: hp("1%"),
+  },
+  headerText: {
+    position: "absolute",
+    fontSize: wp("3%"),
+    fontWeight: '500',
+    color: "#FFFFFF",
+  },
+  cardContent: {
+    width: "90%",
+    justifyContent: 'space-evenly',
+  },
+  rate: { fontSize: wp("3%"), marginBottom: hp("0.5%") },
+  products: { fontSize: wp("2.8%"), marginBottom: hp("1%") },
+  about: {
+    fontSize: wp("2.5%"),
+    fontStyle: "italic",
+    color: "#D19B00",
+    marginBottom: hp("0.5%"),
+    textAlign: "center",
+  },
+  bookButton: {
+    backgroundColor: "#FFC107",
+    borderRadius: wp("5%"),
+    minWidth: wp("18%"),
+    paddingVertical: hp("0.8%"),
+    alignItems: "center",
+  },
+  bookText: { color: "#fff", fontWeight: "bold", fontSize: wp("3%") },
+  bold: { fontWeight: "bold" },
+  footerCon: { alignItems: 'center' },
 });
 
 export default Card;

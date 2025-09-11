@@ -1,13 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
-import ProductData from '../components/ProductData';
-import Card from '../components/Card';
+import React from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    FlatList,
+} from "react-native";
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
+import ProductData from "../components/ProductData";
+import Card from "../components/Card";
+
 const ProductPackageScreen = () => {
     return (
         <View style={styles.mainContainer}>
             {/* Header */}
             <View style={styles.headContainer}>
-                <Image style={styles.iconImage} source={require('../assets/Vector.png')} />
+                <Image
+                    style={styles.iconImage}
+                    source={require("../assets/Vector.png")}
+                />
                 <Text style={styles.headText}>Product Packages</Text>
             </View>
 
@@ -15,107 +30,109 @@ const ProductPackageScreen = () => {
                 data={ProductData}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }) =><Card item={item} />}
-                />
+                columnWrapperStyle={{ justifyContent: "flex-start" }}
+                contentContainerStyle={{paddingBottom: hp("10%"), paddingTop: hp("2%")}}
+                renderItem={({ item }) => <Card item={item} />}
+                keyExtractor={(item, index) => index.toString()}
+                  ItemSeparatorComponent={() => (
+    <View style={{ height: hp("4%") }} />  
+  )}
+            />
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: "#fff",
-        padding : 10,
-        marginBottom : 40
+        paddingHorizontal: wp("3%"),
+        paddingTop: hp("2%"),
     },
     headContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 20,
-        gap: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: hp("2%"),
+        gap: wp("20%"),
     },
     iconImage: {
-        width: 20,
-        height: 20,
-        resizeMode: 'contain',
+        width: wp("5%"),
+        height: wp("5%"),
+        resizeMode: "contain",
     },
     headText: {
-        fontSize: 23,
-        fontWeight: 'bold',
-        color: '#333',
+        fontSize: wp("5.5%"),
+        fontWeight: "bold",
+        color: "#333",
     },
+
+    // ✅ Card styling (use inside Card.js if you want consistency)
     container: {
         backgroundColor: "#EDEDED",
-        borderRadius: 8,
-        marginHorizontal: 10,
-        marginVertical: 10,
-        paddingBottom: 20,
+        borderRadius: wp("1%"),
+        paddingBottom: hp("4%"),
         alignItems: "center",
         shadowColor: "#f7c744",
+        marginHorizontal : wp('10%'),
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 0.4,
         shadowRadius: 10,
         elevation: 5,
-        width: 157,
-        height: 127,
+        width: wp("42%"),
+        height: hp("18%"),
         overflow: "hidden",
     },
     header: {
         width: "100%",
-        height: 42.5,
-        position: "relative",
+        height: hp("6%"),
         alignItems: "center",
         justifyContent: "center",
     },
     headerText: {
         position: "absolute",
-        // top: 20, // adjust to center vertically
-        fontSize: 10,
-        // left : 85,
-        fontWeight: '500',
+        fontSize: wp("2.8%"),
+        fontWeight: "500",
         color: "#FFFFFF",
     },
     cardContent: {
-        width: "90%",
-        // alignItems: "center",
-        justifyContent: 'flex-start'
+        width: "80%",
+        justifyContent: "flex-start",
     },
     rate: {
-        fontSize: 11,
-        marginBottom: 3,
+        fontSize: wp("3%"),
+        marginBottom: hp("0.5%"),
     },
     products: {
-        fontSize: 10,
-        marginBottom: 8,
+        fontSize: wp("2.5%"),
+        marginBottom: hp("1%"),
     },
     about: {
-        fontSize: 8,
+        fontSize: wp("2.2%"),
         fontStyle: "italic",
         color: "#D19B00",
-        marginBottom: 3,
+        marginBottom: hp("0.5%"),
         textAlign: "center",
     },
     bookButton: {
         backgroundColor: "#FFC107",
-        paddingVertical: 4,
-        textAlign: 'center',
-        paddingHorizontal: 6,
-        borderRadius: 20,
-        width: 36,
-        height: 13,
-        // alignSelf: "center",
+        paddingVertical: hp("0.5%"),
+        paddingHorizontal: wp("2%"),
+        borderRadius: wp("5%"),
+        width: wp("15%"),
+        alignSelf: "center",
     },
     bookText: {
         color: "#fff",
         fontWeight: "bold",
-        fontSize: 5
+        fontSize: wp("2.5%"),
+        textAlign: "center",
     },
     bold: {
         fontWeight: "bold",
     },
     footerCon: {
-        alignItems: 'center'
-    }
+        alignItems: "center",
+    },
 });
 
 export default ProductPackageScreen;

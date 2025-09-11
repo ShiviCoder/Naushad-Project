@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, Image, FlatList, Text, View, TouchableOpacity }
 import React from 'react'
 import Dummy from '../components/Dummy'
 import MainData from '../components/MainData';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const ServicesScreen = () => {
     console.log(Dummy[0].image);
     console.log(MainData[0].title)
@@ -38,7 +39,9 @@ const ServicesScreen = () => {
                     renderItem={({ item, index }) => {
                         return (
                             <View style={styles.MainView}>
-                                <Image source={item.image} style={styles.sectionImage}></Image>
+                                <View style={styles.imgContainer}>
+                                    <Image source={item.image} style={styles.sectionImage}></Image>
+                                </View>
 
                                 <View style={styles.rightContainer}>
                                     <Text style={styles.mainText}>{item.title}</Text>
@@ -62,36 +65,37 @@ export default ServicesScreen
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 200
+        marginBottom: hp('2%')
     },
     headContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        gap: 30,
-        padding: 20
+        gap: wp('30%'),
+        paddingHorizontal: wp('5%'),
+        paddingVertical: hp('2%')
     },
     headText: {
-        fontSize: 25,
+        fontSize: wp('6%'),
         // color : 'blue',
         // fontFamily: 'Poppins-Bold'
     },
     storyContainer: {
-        marginVertical: 10,
-        paddingHorizontal: 10,
+        marginVertical: hp('0.2%'),
+        paddingHorizontal: wp('5%'),
     },
     storyView: {
         alignItems: "center",
-        marginRight: 15,
+        marginRight: wp('2%'),
     },
     storyImage: {
-        width: 70,
-        height: 70,
-        borderRadius: 35, // makes it circular
+        width: wp('17%'),
+        height: hp('8%'),
+        borderRadius: wp('10%'), // makes it circular
     },
     storyText: {
-        marginTop: 5,
-        fontSize: 15,
+        marginTop: hp('1%'),
+        fontSize: wp('3.5%'),
         fontWeight: "500",
         color: "#000",
         textAlign: "center",
@@ -99,47 +103,59 @@ const styles = StyleSheet.create({
     },
     MainView: {
         backgroundColor: "rgba(147, 135, 135, 0.1)", // light grey with opacity
-        borderRadius: 12,
-        padding: 12,
-        margin: 12,
+        borderRadius: wp('3%'),
+        // paddingVertical: hp('1%'),
+        paddingHorizontal: wp('1%'),
+        marginVertical: hp('2%'),
+        marginHorizontal: wp('5%'),
         alignItems: "center",
         justifyContent: "space-around",
         flexDirection: "row",
         // iOS shadow
-        borderWidth: 1,
-        borderColor: "rgba(0,0,0,0.05)s", // very light grey line
+      // very light grey line
+    },
+    imgContainer: {
+        height: hp('20%'),
+        width: wp('35%'),
+        justifyContent: "flex-end",
+        alignItems: "center",
+        overflow : 'hidden'
     },
     sectionImage: {
-        width: 150,
-        height: 120,
+        width: '100%',
+        alignSelf: 'flex-end',
+
+        height: '90%',
         // borderRadius: 12,
-        marginBottom: 5,
-        resizeMode: "contain"
+        // marginBottom: 5,
+        resizeMode: "cover"
     },
     mainText: {
-        fontSize: 17,
+        fontSize: wp('5%'),
         color: "#333",
         textAlign: "center",
-        fontFamily: 'Poppins-Bold'
+        // fontFamily: 'Poppins-Medium',
+        fontFamily: 'Poppins-Regular',
+        fontWeight: '700'
     },
     rightContainer: {
         flexDirection: 'column',
         alignItems: 'flex-start'
     },
     price: {
-        fontSize: 15,
-        fontFamily: 'Poppins-Bold'
+        fontSize: wp('4%'),
+        fontFamily: 'Poppins-Medium'
     },
     desc: {
-        fontSize: 12
+        fontSize: wp('3%')
     },
     bookButton: {
-        backgroundColor: "#FFD700", // bright yellow
-        paddingVertical: 5,
-        paddingHorizontal: 20,
-        borderRadius: 50,
+        backgroundColor: "#F6B745", // bright yellow
+        paddingVertical: hp('0.5%'),
+        paddingHorizontal: wp('3%'),
+        borderRadius: wp('10%'),
         alignItems: "center",
-        marginTop: 10,
+        marginTop: hp('3%'),
 
         // Shadow for iOS
         shadowColor: "#000",
@@ -148,11 +164,11 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
 
         // Shadow for Android
-        elevation: 1
+        elevation: 4
     },
     bookButtonText: {
         color: "#fff", // white text
-        fontSize: 16,
+        fontSize: wp('3%'),
         fontWeight: "bold"
     }
 });

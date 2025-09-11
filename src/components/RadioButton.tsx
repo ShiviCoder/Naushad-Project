@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Animated, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
-const RadioButton = ({ type = "status", options = [], selected, onSelect, labels = [] }: RadioButtonProps) => {
+const RadioButton = ({ type = "status", selected, onSelect, labels = [] }) => {
   // ✅ Status toggle (Accepted / Pending)
   if (type === "status") {
     const [isAccepted, setIsAccepted] = useState(false);
@@ -10,10 +14,10 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
     const AcceptedOffset = useState(new Animated.Value(0))[0];
     const PendingOffset = useState(new Animated.Value(0))[0];
 
-    const thumbSize = 10;
-    const trackWidth = 35;
-    const trackHeight = 19;
-    const padding = 5;
+    const thumbSize = wp("3.5%");
+    const trackWidth = wp("12%");
+    const trackHeight = hp("3%");
+    const padding = wp("1.5%");
 
     const acceptTranslateX = AcceptedOffset.interpolate({
       inputRange: [0, 1],
@@ -47,7 +51,7 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
       <View style={styles.checkContainer}>
         {/* Accepted */}
         <View style={styles.checkBox}>
-          <Text>Accepted</Text>
+          <Text style={{ fontSize: wp("3.5%") }}>Accepted</Text>
           <TouchableOpacity activeOpacity={1} onPress={toggleSwitchAccepted}>
             <View
               style={[
@@ -76,7 +80,7 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
 
         {/* Pending */}
         <View style={styles.checkBox}>
-          <Text>Pending</Text>
+          <Text style={{ fontSize: wp("3.5%") }}>Pending</Text>
           <TouchableOpacity activeOpacity={1} onPress={toggleSwitchPending}>
             <View
               style={[
@@ -111,10 +115,10 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
     const [isOn, setIsOn] = useState(selected === "Dark");
 
     const Offset = useState(new Animated.Value(isOn ? 1 : 0))[0];
-    const thumbSize = 16;
-    const trackWidth = 50;
-    const trackHeight = 28;
-    const padding = 4;
+    const thumbSize = wp("3%");
+    const trackWidth = wp("10%");
+    const trackHeight = hp("3%");
+    const padding = wp("1.5%");
 
     const translateX = Offset.interpolate({
       inputRange: [0, 1],
@@ -134,7 +138,7 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
 
     return (
       <View style={styles.toggleContainer}>
-        <Text style={styles.toggleLabel}>{labels[0] || "Off"}</Text>
+        <Text style={[styles.toggleLabel, { fontSize: wp("3.5%") }]}>{labels[0] || "Off"}</Text>
         <TouchableOpacity activeOpacity={1} onPress={toggleSwitch}>
           <View
             style={[
@@ -159,7 +163,7 @@ const RadioButton = ({ type = "status", options = [], selected, onSelect, labels
             />
           </View>
         </TouchableOpacity>
-        <Text style={styles.toggleLabel}>{labels[1] || "On"}</Text>
+        <Text style={[styles.toggleLabel, { fontSize: wp("3.5%") }]}>{labels[1] || "On"}</Text>
       </View>
     );
   }
@@ -171,13 +175,13 @@ const styles = StyleSheet.create({
   checkContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-    marginVertical: 10,
+    paddingHorizontal: wp("4%"),
+    marginVertical: hp("1%"),
   },
   checkBox: {
     flexDirection: "row",
-    gap: 10,
     alignItems: "center",
+    gap: wp("2%"),
   },
   track: {
     borderRadius: 20,
@@ -194,11 +198,10 @@ const styles = StyleSheet.create({
   toggleContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    marginTop: 8,
+    gap: wp("2%"),
+    marginTop: hp("1%"),
   },
   toggleLabel: {
-    fontSize: 14,
     fontWeight: "500",
     color: "#333",
   },
